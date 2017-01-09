@@ -2,9 +2,9 @@ FROM ubuntu:16.04
 MAINTAINER Maciej Litwiniuk <maciej@litwiniuk.net>
 ENV RUBY_VERSION 2.3.3
 ENV NODE_VERSION 6.9.4
-ENV PHANTOMJS_VERSION 6.9.4
+ENV PHANTOMJS_VERSION 2.1.1
 RUN apt-get -qq update
-RUN apt-get install -y curl git-core build-essential openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libpq-dev libmysqlclient-dev libffi-dev libyaml-dev libtool bison automake fontconfig gawk libgmp-dev libgdbm-dev libncurses5-dev pkg-config
+RUN apt-get install -y curl git-core build-essential openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libpq-dev libmysqlclient-dev libffi-dev libyaml-dev libtool bison automake fontconfig gawk libgmp-dev libgdbm-dev libncurses5-dev pkg-config wget
 
 ## RUBY via RVM
 RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import -
@@ -24,9 +24,6 @@ RUN /bin/bash -l -c "source /root/.nvm/nvm.sh \
     && nvm use default"
 
 ## PHANTOMJS
-
-ENV PHANTOMJS_VERSION 2.1.1
-RUN apt-get install wget
 RUN wget -O /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2
 RUN tar -xjf /tmp/phantomjs.tar.bz2
 RUN mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/bin/
